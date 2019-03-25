@@ -426,7 +426,7 @@ class PermissionsUtil {
         return any as IPermissionsCallback
     }
 
-    private fun invokePermissionsGranted(any: Any, requestCode: Int, permissions: Array<String>) {
+    private fun invokePermissionsGranted(any: Any, requestCode: Int, permissions: Array<out String>) {
         getPermissionsCallback(any).onPermissionsGranted(requestCode, permissions)
     }
 
@@ -435,12 +435,12 @@ class PermissionsUtil {
     }
 
     interface IPermissionsCallback {
-        fun onPermissionsGranted(requestCode: Int, permissions: Array<String>)
+        fun onPermissionsGranted(requestCode: Int, permissions: Array<out String>)
 
         fun onPermissionsDenied(requestCode: Int, permissions: Array<String>)
     }
 
-    fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == mRequestCode) {
             val deniedPermissions = mutableListOf<String>()
             grantResults
